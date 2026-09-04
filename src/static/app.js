@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                       return `<li>
                       <span class="participant-email">${escapedEmail}</span>
-                      <button class="delete-participant" title="Unregister" data-activity="${escapedActivity}" data-email="${escapedEmail}">&times;</button>
+                      <button type="button" class="delete-participant" title="Unregister" aria-label="Unregister ${escapedEmail} from ${escapedActivity}" data-activity="${escapedActivity}" data-email="${escapedEmail}">&times;</button>
                     </li>`;
                     }
                   )
