@@ -26,10 +26,24 @@ document.addEventListener("DOMContentLoaded", () => {
             ? `<ul class="participants-list">
                 ${details.participants
                   .map(
-                    (email) => `<li>
-                      <span class="participant-email">${email}</span>
-                      <button class="delete-participant" title="Unregister" data-activity="${name}" data-email="${email}">&times;</button>
-                    </li>`
+(email) => {
+                      const entities = {
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#39;",
+                      };
+                      const escapeHTML = (value) =>
+                        String(value).replace(/[&<>"']/g, (character) => entities[character]);
+                      const escapedEmail = escapeHTML(email);
+                      const escapedActivity = escapeHTML(name);
+
+                      return `<li>
+                      <span class="participant-email">${escapedEmail}</span>
+                      <button class="delete-participant" title="Unregister" data-activity="${escapedActivity}" data-email="${escapedEmail}">&times;</button>
+                    </li>`;
+                    }
                   )
                   .join("")}
               </ul>`
